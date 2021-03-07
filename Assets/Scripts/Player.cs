@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -63,7 +64,7 @@ public class Player : MonoBehaviour
         
 
         if (collision.gameObject.tag == "enemy")
-            Debug.Log("Collision with plant");
+            SceneManager.LoadScene("Lvl1_1");
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
