@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Base
   - enemy
+  - pipe
+  - player
+  - plant
   layers:
   - Default
   - TransparentFX

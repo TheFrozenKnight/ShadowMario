@@ -14,4 +14,9 @@ public class MenuButtons : MonoBehaviour
     {
         SceneManager.LoadScene("options");
     }
+    public void OnExitButtonPress()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
+        //Application.Quit();
+    }
 }

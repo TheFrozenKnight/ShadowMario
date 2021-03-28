@@ -5,13 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 10f;
-    public float jumpspeed = 5f;
+    public float speed = 3f;
+    public float jumpspeed = 6f;
     private bool Isgrounded = true;
     private Rigidbody2D rigidBody2D;
     private SpriteRenderer spriteRenderer;
-    public Sprite jumpSprite;
-    public Sprite idleSprite;
     private Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -25,6 +23,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         float h = Input.GetAxis("Horizontal");
+        //float jump = Input.GetAxis("Jump");
+
         rigidBody2D.velocity = new Vector2(h * speed, rigidBody2D.velocity.y);
         if(h!=0 && Isgrounded)
         {
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         {
             animator.SetBool("running", false);
         }
-        if(Input.GetKeyDown(KeyCode.Space) && Isgrounded == true)
+        if( Input.GetKeyDown(KeyCode.Space) && Isgrounded == true) 
         {
             rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpspeed);
             animator.SetBool("jumping", true);
@@ -50,21 +50,55 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Vector2 direction = collision.GetContact(0).normal;
+        if (collision.gameObject.tag == "enemy")
+        {
+            if (direction.y == 1)
+            {
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                SceneManager.LoadScene("Lvl1_1");
+            }
+        }
+        if (collision.gameObject.tag == "plant")
+        {
+            SceneManager.LoadScene("Lvl1_1");
+        }
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Base")
+        if (collision.gameObject.tag == "Base" || collision.gameObject.tag == "pipe")
         { 
             Isgrounded = true;
             animator.SetBool("jumping", false);
         }
-        
-
-        if (collision.gameObject.tag == "enemy")
-            SceneManager.LoadScene("Lvl1_1");
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Base")
+        if (collision.gameObject.tag == "Base" || collision.gameObject.tag == "pipe")
             Isgrounded = false;
     }
 }
+
+/*
+void OnCollisionEnter(Collision c)
+   {
+      Vector2 direction = c.GetContact(0).normal;
+      If( direction.x == 1 ) print(“right”);
+      If( direction.x == -1 ) print(“left”);
+      If( direction.y == 1 ) print(“up”);
+      If( direction.y == -1 ) print(“down”);
+   }
+if (collision.gameObject.tag == "collectibles")
+    {
+        Destroy(collision.gameObject);
+        score++;
+        scoreText.text = ("Score: " + score);
+    }
+*/
+
