@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,9 +12,12 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidBody2D;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    public Text scoreText;
+    public static int score = 0;
     // Start is called before the first frame update
     void Start()
     {
+        score = 0;
         rigidBody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -23,7 +27,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         float h = Input.GetAxis("Horizontal");
-        //float jump = Input.GetAxis("Jump");
 
         rigidBody2D.velocity = new Vector2(h * speed, rigidBody2D.velocity.y);
         if(h!=0 && Isgrounded)
@@ -57,6 +60,8 @@ public class Player : MonoBehaviour
         {
             if (direction.y == 1)
             {
+                score++;
+                scoreText.text = ("SCORE: " + score);
                 Destroy(collision.gameObject);
             }
             else
@@ -72,15 +77,19 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Base" || collision.gameObject.tag == "pipe")
-        { 
-            Isgrounded = true;
-            animator.SetBool("jumping", false);
+        if (collision.gameObject.tag == "Base" || collision.gameObject.tag == "pipe" || collision.gameObject.tag == "questionBlock")
+        {
+            Vector3 direction = transform.position - collision.gameObject.transform.position;
+            if (Mathf.Abs(direction.x) <= Mathf.Abs(direction.y) && direction.y > 0)
+            {
+                Isgrounded = true;
+                animator.SetBool("jumping", false);
+            }
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Base" || collision.gameObject.tag == "pipe")
+        if (collision.gameObject.tag == "Base" || collision.gameObject.tag == "pipe" || collision.gameObject.tag == "questionBlock")
             Isgrounded = false;
     }
 }
@@ -89,11 +98,26 @@ public class Player : MonoBehaviour
 void OnCollisionEnter(Collision c)
    {
       Vector2 direction = c.GetContact(0).normal;
-      If( direction.x == 1 ) print(“right”);
-      If( direction.x == -1 ) print(“left”);
-      If( direction.y == 1 ) print(“up”);
-      If( direction.y == -1 ) print(“down”);
+      if(direction.x == 1) print("right");
+      if(direction.x == -1) print("left");
+      if(direction.y == 1) print("up");
+      if(direction.y == -1) print("down");
    }
+
+
+if (Mathf.Abs (direction.x) > Mathf.Abs (direction.y)) {
+ 
+             if(direction.x>0){print("collision is to the right");}
+             else{print("collision is to the left");}
+         
+         }else{
+ 
+             if(direction.y>0){print("collision is up");}
+             else{print("collision is down");}
+ 
+         }
+
+
 if (collision.gameObject.tag == "collectibles")
     {
         Destroy(collision.gameObject);

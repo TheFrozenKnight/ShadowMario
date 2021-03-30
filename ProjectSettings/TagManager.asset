@@ -9,6 +9,8 @@ TagManager:
   - pipe
   - player
   - plant
+  - END
+  - questionBlock
   layers:
   - Default
   - TransparentFX
