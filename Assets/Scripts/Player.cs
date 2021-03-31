@@ -12,8 +12,9 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidBody2D;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-    public Text scoreText;
+    //public Text scoreText;
     public static int score = 0;
+    public static int lives = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,12 +57,12 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Vector2 direction = collision.GetContact(0).normal;
-        if (collision.gameObject.tag == "enemy")
+        if (collision.gameObject.CompareTag("enemy"))
         {
+           
             if (direction.y == 1)
             {
                 score++;
-                scoreText.text = ("SCORE: " + score);
                 Destroy(collision.gameObject);
             }
             else
@@ -69,7 +70,7 @@ public class Player : MonoBehaviour
                 SceneManager.LoadScene("Lvl1_1");
             }
         }
-        if (collision.gameObject.tag == "plant")
+        if (collision.gameObject.CompareTag("plant"))
         {
             SceneManager.LoadScene("Lvl1_1");
         }
@@ -77,7 +78,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Base" || collision.gameObject.tag == "pipe" || collision.gameObject.tag == "questionBlock")
+        if (collision.gameObject.CompareTag("Base") || collision.gameObject.CompareTag("pipe") || collision.gameObject.CompareTag("questionBlock"))
         {
             Vector3 direction = transform.position - collision.gameObject.transform.position;
             if (Mathf.Abs(direction.x) <= Mathf.Abs(direction.y) && direction.y > 0)
@@ -89,8 +90,17 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Base" || collision.gameObject.tag == "pipe" || collision.gameObject.tag == "questionBlock")
+        if (collision.gameObject.CompareTag("Base") || collision.gameObject.CompareTag("pipe") || collision.gameObject.CompareTag("questionBlock"))
             Isgrounded = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("CollectableCoin"))
+        {
+            score++;
+            Destroy(collision.gameObject);
+        }
     }
 }
 

@@ -5,20 +5,29 @@ using UnityEngine;
 public class QuestionBlock : MonoBehaviour
 {
     public int coins = 1;
+    public Sprite questionOff;
+    public GameObject CoinBox;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector2 direction = collision.GetContact(0).normal;
-        if (direction.y == 1)
+        if (collision.gameObject.CompareTag("player"))
         {
-            if(coins>0)
+            Vector2 direction = collision.GetContact(0).normal;
+
+            if (Mathf.Abs(direction.x) <= Mathf.Abs(direction.y))
             {
-                //spawn coin
-                coins--;
-                Player.score++;
-            }
-            if (coins == 0)
-            {
-                //change sprite to questionOff
+                if (direction.y > 0)
+                {
+                    if (coins > 0)
+                    {
+                        (Instantiate(CoinBox) as GameObject).transform.parent = this.gameObject.transform;
+                        coins--;
+                        Player.score++;
+                    }
+                    if (coins == 0)
+                    {
+                        this.gameObject.GetComponent<SpriteRenderer>().sprite = questionOff;
+                    }
+                }
             }
         }
     }
