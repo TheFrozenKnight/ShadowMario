@@ -8,6 +8,9 @@ public class MenuButtons : MonoBehaviour
 {
     public void OnPlayButtonPress()
     {
+        DataBaseDDOL.scoreDDOL = 0;
+        DataBaseDDOL.livesDDOL = 3;
+        DataBaseDDOL.coinsDDol = 0;
         SceneManager.LoadScene("Lvl1_1");
     }
     public void OnOptionsButtonPress()

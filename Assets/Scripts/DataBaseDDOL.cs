@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DataBaseDDOL : MonoBehaviour
 {
-    public static int livesDDOL;
-    public static int scoreDDOL;
-    public static int coinsDDol;
+    public static int livesDDOL = 3;
+    public static int scoreDDOL = 0;
+    public static int coinsDDol = 0;
     public static DataBaseDDOL instance;
 
     void Awake()
@@ -24,10 +24,4 @@ public class DataBaseDDOL : MonoBehaviour
         Player.coins = coinsDDol;
         Player.lives = livesDDOL;
     }
-    /* Start is called before the first frame update
-    void Start()
-    {
-        Player.coins = coinsDDol;
-        Player.lives = livesDDOL;
-    }*/
 }
