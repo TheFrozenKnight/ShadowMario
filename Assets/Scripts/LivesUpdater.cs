@@ -9,7 +9,7 @@ public class LivesUpdater : MonoBehaviour
     void Start()
     {
         temp = DataBaseDDOL.livesDDOL;
-        this.gameObject.GetComponent<Text>().text = ("LIVES" + DataBaseDDOL.livesDDOL);
+        this.gameObject.GetComponent<Text>().text = ("LIVES\n" + DataBaseDDOL.livesDDOL);
     }
 
     void Update()
@@ -18,7 +18,7 @@ public class LivesUpdater : MonoBehaviour
         {
             temp = Player.lives;
             DataBaseDDOL.livesDDOL = temp;
-            this.gameObject.GetComponent<Text>().text = ("LIVES" + DataBaseDDOL.livesDDOL);
+            this.gameObject.GetComponent<Text>().text = ("LIVES\n" + DataBaseDDOL.livesDDOL);
         }
     }
 }

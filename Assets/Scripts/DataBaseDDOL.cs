@@ -24,4 +24,10 @@ public class DataBaseDDOL : MonoBehaviour
         Player.coins = coinsDDol;
         Player.lives = livesDDOL;
     }
+    public static void ResetDDOL()
+    {
+        scoreDDOL = 0;
+        livesDDOL = 3;
+        coinsDDol = 0;
+    }
 }

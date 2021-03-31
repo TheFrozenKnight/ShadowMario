@@ -9,7 +9,7 @@ public class CoinsUpdater : MonoBehaviour
     void Start()
     {
         temp = DataBaseDDOL.coinsDDol;
-        this.gameObject.GetComponent<Text>().text = ("COINS" + DataBaseDDOL.coinsDDol);
+        this.gameObject.GetComponent<Text>().text = ("COINS\n" + DataBaseDDOL.coinsDDol);
     }
 
     void Update()
@@ -18,7 +18,7 @@ public class CoinsUpdater : MonoBehaviour
         {
             temp = Player.coins;
             DataBaseDDOL.coinsDDol = temp;
-            this.gameObject.GetComponent<Text>().text = ("COINS" + DataBaseDDOL.coinsDDol);
+            this.gameObject.GetComponent<Text>().text = ("COINS\n" + DataBaseDDOL.coinsDDol);
         }
     }
 }

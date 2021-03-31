@@ -18,7 +18,7 @@ public class ScoreUpdate : MonoBehaviour
         {
             temp = Player.score;
             DataBaseDDOL.scoreDDOL = temp;
-            this.gameObject.GetComponent<Text>().text = ("SCORE" + Player.score);
+            this.gameObject.GetComponent<Text>().text = ("SCORE\n" + Player.score);
         }
     }
 }
