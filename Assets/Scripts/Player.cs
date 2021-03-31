@@ -12,13 +12,16 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidBody2D;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-    //public Text scoreText;
+    public AudioSource audioSource;
     public static int score = 0;
     public static int lives = 3;
+    public AudioClip[] sounds = new AudioClip[5];
+
     // Start is called before the first frame update
     void Start()
     {
         score = 0;
+        audioSource = GetComponent<AudioSource>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -41,6 +44,8 @@ public class Player : MonoBehaviour
         if( Input.GetKeyDown(KeyCode.Space) && Isgrounded == true) 
         {
             rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpspeed);
+            audioSource.clip = sounds[0];
+            audioSource.Play();
             animator.SetBool("jumping", true);
         }
 
@@ -64,6 +69,8 @@ public class Player : MonoBehaviour
             {
                 score++;
                 Destroy(collision.gameObject);
+                audioSource.clip = sounds[2];
+                audioSource.Play();
             }
             else
             {
@@ -99,6 +106,8 @@ public class Player : MonoBehaviour
         if(collision.gameObject.CompareTag("CollectableCoin"))
         {
             score++;
+            audioSource.clip = sounds[1];
+            audioSource.Play();
             Destroy(collision.gameObject);
         }
     }

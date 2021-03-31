@@ -7,6 +7,12 @@ public class QuestionBlock : MonoBehaviour
     public int coins = 1;
     public Sprite questionOff;
     public GameObject CoinBox;
+    public static AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("player"))
@@ -21,6 +27,7 @@ public class QuestionBlock : MonoBehaviour
                     {
                         (Instantiate(CoinBox) as GameObject).transform.parent = this.gameObject.transform;
                         coins--;
+                        audioSource.Play();
                         Player.score++;
                     }
                     if (coins == 0)
