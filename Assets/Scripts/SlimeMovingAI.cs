@@ -40,7 +40,7 @@ public class SlimeMovingAI : MonoBehaviour
         {
             Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
-        if (collision.gameObject.tag != "Base" && collision.gameObject.tag != "player")
+        if (!collision.gameObject.CompareTag("Base") && !collision.gameObject.CompareTag("player") && !collision.gameObject.CompareTag("questionBlock"))
         {
             direction *= -1;
         }
