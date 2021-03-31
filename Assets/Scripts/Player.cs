@@ -30,6 +30,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(lives == 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
         float h = Input.GetAxis("Horizontal");
 
         rigidBody2D.velocity = new Vector2(h * speed, rigidBody2D.velocity.y);
@@ -74,11 +78,13 @@ public class Player : MonoBehaviour
             }
             else
             {
+                lives--;
                 SceneManager.LoadScene("Lvl1_1");
             }
         }
         if (collision.gameObject.CompareTag("plant"))
         {
+            lives--;
             SceneManager.LoadScene("Lvl1_1");
         }
     }
