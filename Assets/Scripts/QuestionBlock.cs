@@ -27,8 +27,9 @@ public class QuestionBlock : MonoBehaviour
                     {
                         (Instantiate(CoinBox) as GameObject).transform.parent = this.gameObject.transform;
                         coins--;
+                        Player.coins++;
                         audioSource.Play();
-                        Player.score++;
+                        Player.score+=100;
                     }
                     if (coins == 0)
                     {

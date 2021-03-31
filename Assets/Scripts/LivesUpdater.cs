@@ -9,16 +9,16 @@ public class LivesUpdater : MonoBehaviour
     void Start()
     {
         temp = DataBaseDDOL.livesDDOL;
+        this.gameObject.GetComponent<Text>().text = ("LIVES" + DataBaseDDOL.livesDDOL);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Player.lives != temp)
         {
-            temp = Player.score;
+            temp = Player.lives;
             DataBaseDDOL.livesDDOL = temp;
-            this.gameObject.GetComponent<Text>().text = ("LIVES: " + Player.lives);
+            this.gameObject.GetComponent<Text>().text = ("LIVES" + DataBaseDDOL.livesDDOL);
         }
     }
 }

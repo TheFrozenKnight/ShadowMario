@@ -12,6 +12,7 @@ TagManager:
   - END
   - questionBlock
   - CollectableCoin
+  - flag
   layers:
   - Default
   - TransparentFX

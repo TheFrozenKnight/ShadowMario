@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     public AudioSource audioSource;
     public static int score = 0;
+    public static int coins = 0;
     public static int lives = 3;
     public AudioClip[] sounds = new AudioClip[5];
 
@@ -71,7 +72,7 @@ public class Player : MonoBehaviour
            
             if (direction.y == 1)
             {
-                score++;
+                score+=200;
                 Destroy(collision.gameObject);
                 audioSource.clip = sounds[2];
                 audioSource.Play();
@@ -111,11 +112,18 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("CollectableCoin"))
         {
-            score++;
+            score+=100;
+            coins++;
             audioSource.clip = sounds[1];
             audioSource.Play();
             Destroy(collision.gameObject);
         }
+        if (collision.gameObject.CompareTag("END"))
+        {
+            SceneManager.LoadScene("Win");
+        }
+
+
     }
 }
 

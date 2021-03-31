@@ -5,8 +5,10 @@ using UnityEngine;
 public class DataBaseDDOL : MonoBehaviour
 {
     public static int livesDDOL;
-
+    public static int scoreDDOL;
+    public static int coinsDDol;
     public static DataBaseDDOL instance;
+
     void Awake()
     {
         if (instance == null)
@@ -18,17 +20,14 @@ public class DataBaseDDOL : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
+
+        Player.coins = coinsDDol;
         Player.lives = livesDDOL;
     }
-
-    // Update is called once per frame
-    void Update()
+    /* Start is called before the first frame update
+    void Start()
     {
-        
-    }
+        Player.coins = coinsDDol;
+        Player.lives = livesDDOL;
+    }*/
 }

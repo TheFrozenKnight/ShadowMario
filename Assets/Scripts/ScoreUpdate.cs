@@ -11,13 +11,13 @@ public class ScoreUpdate : MonoBehaviour
         temp = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Player.score != temp)
         {
             temp = Player.score;
-            this.gameObject.GetComponent<Text>().text = ("SCORE: " + Player.score);
+            DataBaseDDOL.scoreDDOL = temp;
+            this.gameObject.GetComponent<Text>().text = ("SCORE" + Player.score);
         }
     }
 }
